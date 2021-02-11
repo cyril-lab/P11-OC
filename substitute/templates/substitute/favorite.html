@@ -1,0 +1,48 @@
+{% extends 'pur_beurre/layout.html' %}
+ {% load static %}
+{% block title %}Favoris{% endblock %}
+    {% block content %}
+
+
+<section>
+    <div  class="container" >
+        <div class="row align-items-center" >
+                <div class="col-md-12">
+                    <h2 class="text-center  ">Mes favoris</h2>
+                </div>
+        </div>
+        <div class="row ">
+            {% for pk, name, url, nutriscore in product %}
+                <div class="col-md-6 col-lg-4 ">
+                    <div class="card mt-4 product-box">
+                        <div class="position-relative">
+                        <img class="card-img img-product" src="{{url}}">
+                        <div class="card-img-overlay d-flex justify-content-end align-items-baseline">
+                            {% if nutriscore == "a"%}
+                                <img class="img-nutriscore"
+                                     src={% static 'assets/fonts/nutriscore-a.svg' %}>
+                            {% elif nutriscore == "b"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-b.svg' %}>
+                            {% elif nutriscore == "c"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-c.svg' %}>
+                            {% elif nutriscore == "d"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-d.svg' %}>
+                            {% elif nutriscore == "e"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-e.svg' %}>
+                            {% endif %}
+                        </div>
+                        </div>
+                            <div class="card-body">
+                                <a class="card-link" href="{% url 'favorite-detail' pk=pk %}">
+                                    <h5 class="card-title" >{{name}}</h5>
+                                </a>
+                            </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+</section>
+
+    {% endblock content %}

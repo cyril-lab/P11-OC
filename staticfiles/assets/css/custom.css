@@ -1,0 +1,140 @@
+[type=search] {
+  background: #dcdcdc;
+}
+
+#search-prod-1 {
+  padding: 15px;
+  width: 100%;
+  margin: 0px;
+}
+
+#history-text {
+  color: #000000;
+  text-align: justify;
+  padding: 0px 10px 0px 10px;
+  width: 100%;
+}
+
+#logo-img {
+  width: 50px;
+}
+
+#colette-img {
+  width: 88px;
+}
+
+#remy-img {
+  width: 254px;
+}
+
+#contact {
+  padding: 40px 0px;
+}
+
+#contact-1 {
+  margin-bottom:80px;
+}
+
+#mainNav {
+  background: #345a61;
+}
+
+#footer {
+  height: 4rem;
+
+  position: fixed;
+  bottom:0;
+  width:100%;
+  background-color: white;
+}
+
+#footer .text-center {
+  padding: 22px 0px 0px;
+}
+
+a:hover {
+  color: #1e1716;
+  text-decoration: none;
+}
+
+#food-header {
+  padding-top: 20px;
+  height: 226px;
+  min-height: 231px;
+}
+
+.bg-moules {
+  background-color: #345a61;
+}
+
+.bg-rooibos {
+  background-color: #c45525;
+}
+
+.bg-rigolo {
+  background-color: #86ebe6;
+}
+
+.bg-caramel {
+  background-color: #de9440;
+}
+
+.bg-biscuit {
+  background-color: #e8a75d;
+}
+
+#contact-1 {
+  height: initial;
+  padding: 0px;
+}
+
+.img-product {
+  height: 10rem;
+}
+
+.product-box {
+  height: 19rem;
+}
+
+.img-nutriscore {
+  height: 4rem;
+}
+
+#section-product {
+  padding: 4rem 0;
+}
+.card-img {
+  max-width: 100%;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-detail {
+  padding-top: 0;
+}
+
+#container-img-account {
+  background-image: url('../../assets/img/fond1.jpg');
+  height: 150px;
+}
+
+#container-no-result {
+  height: 5000px;
+}
+
+.background-product {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 300px;
+}
+
+html{
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  font-family: "Scope One", sans-serif;
+}

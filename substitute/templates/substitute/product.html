@@ -1,0 +1,61 @@
+{% extends 'pur_beurre/layout.html' %}
+{% load static %}
+{% block title %}Produits{% endblock %}
+{% block content %}
+
+<section id="section-product">
+        <div  class="container-fluid bg-dark" >
+            <div class="row background-product align-items-center" style="background-image:url({{product_img}})">
+                <div class=" mx-auto ">
+                    <h4 id="product" class="text-center text-white  bg-rooibos p-4 text-uppercase rounded-pill">{{search_product}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row ">
+            {% for pk, name, url, nutriscore in product_substitute %}
+            <div class="col-md-6 col-lg-4 ">
+                    <div class="card mt-4 product-box">
+                        <div class="position-relative">
+                        <img class="card-img img-product" src="{{url}}">
+                        <div class="card-img-overlay d-flex justify-content-end align-items-baseline">
+                            {% if nutriscore == "a"%}
+                                <img class="img-nutriscore"
+                                     src={% static 'assets/fonts/nutriscore-a.svg' %}>
+                            {% elif nutriscore == "b"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-b.svg' %}>
+                            {% elif nutriscore == "c"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-c.svg' %}>
+                            {% elif nutriscore == "d"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-d.svg' %}>
+                            {% elif nutriscore == "e"%}
+                                <img class="img-nutriscore"src={% static 'assets/fonts/nutriscore-e.svg' %}>
+                            {% endif %}
+                        </div>
+                        </div>
+                            <div class="card-body">
+                                <a class="card-link" href="{% url 'product' pk=pk %}">
+                                    <h5 class="card-title" >{{name}}</h5>
+                                </a>
+                            </div>
+                        {% if user.is_authenticated %}
+                        <div class="text-center card-footer">
+                            <a href="{% url 'save_favorite' pk_prod=pk %}">
+                                <div class="d-flex d-xl-flex justify-content-center align-items-end">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fa fa-star fa fa-floppy-o mr-2">
+                                        </i>Sauvegarder
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% endblock content %}

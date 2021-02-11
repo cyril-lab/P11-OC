@@ -1,0 +1,58 @@
+{% extends 'pur_beurre/layout.html' %}
+{% load static %}
+{% block title %}Détail produit{% endblock %}
+{% block content %}
+
+<section class="section-detail">
+        <div  class="container-fluid bg-dark" >
+            <div class="row background-product align-items-center" style="background-image:url({{product.image_url}})">
+                <div class=" mx-auto ">
+                    <h4 id="product" class="text-center text-white  bg-rooibos p-4 text-uppercase rounded-pill">{{product.name}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-6 text-center">
+                    {% if product.nutriscore == "a"%}
+                        <img src={% static 'assets/fonts/nutriscore-a.svg' %}>
+                    {% elif product.nutriscore == "b"%}
+                        <img src={% static 'assets/fonts/nutriscore-b.svg' %}>
+                    {% elif product.nutriscore == "c"%}
+                        <img src={% static 'assets/fonts/nutriscore-c.svg' %}>
+                    {% elif product.nutriscore == "d"%}
+                        <img src={% static 'assets/fonts/nutriscore-d.svg' %}>
+                    {% elif product.nutriscore == "e"%}
+                        <img src={% static 'assets/fonts/nutriscore-e.svg' %}>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center"><img src="{{url}}">
+                    </div>
+                    <h4>Repères nutritionels pour 100 g :</h4><br>
+                    <h5>Matières grasses / Lipides : <strong>{{product.nutriment_fat}}</strong> g  </h5>
+                    <h5>Acides gras saturés : <strong>{{product.nutriment_saturated_fat}}</strong> g </h5>
+                    <h5>Sel : <strong>{{product.nutriment_salt}}</strong> g  </h5>
+                    <h5>Sucres : <strong>{{product.nutriment_sugars}}</strong> g </h5>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12 m-4 text-center bg-caramel p-2">
+                    <a class="text-white " href="{{product.url}}">Voir fiche openfoodfact</a>
+                </div>
+                <div class="col-md-12 text-center">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'save_favorite' pk_prod=product.pk %}">
+                            <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-star fa fa-floppy-o mr-2">
+                                    </i>Sauvegarder
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

@@ -1,0 +1,5 @@
+# .coveragerc to control coverage.py
+[run]
+omit=
+    D:\Programmes\P8_OC_pur_beurre\venv\*
+    manage.py

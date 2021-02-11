@@ -1,0 +1,27 @@
+{% extends 'pur_beurre/layout.html' %}
+{% load static %}
+{% block title %}Mon compte{% endblock %}
+{% block content %}
+
+<section id ="container-img-account">
+    <div  class="container-fluid align-items-center p-0" >
+        <div class="row align-items-center h-100">
+            <div class="col mx-auto col-md-4">
+                {% if user.is_authenticated %}
+                    <h4 class="text-center text-white bg bg-dark p-4">Bienvenue {{ user.first_name }} {{ user.last_name }}</h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid align-items-center" >
+            <div class="row align-items-center h-100">
+                <div class="col mt-5">
+                    {% if user.is_authenticated %}
+                        <p id="account-mail" class="text-center">Votre email :  {{ user.email }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

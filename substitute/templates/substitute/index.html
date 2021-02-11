@@ -1,0 +1,78 @@
+{% extends 'pur_beurre/layout.html' %}
+ {% load static %}
+{% block title %}Accueil{% endblock %}
+    {% block content %}
+
+    <header class="masthead text-center text-white d-flex" style="background-image:url('{%static 'assets/img/fond1.jpg' %}')">
+        <div class="container my-auto">
+            <div class="row ">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="text-uppercase bg-moules py-2"><strong>Du gras, oui, mais de qualite !</strong></h1>
+                    <hr>
+                    <h2 id="index-h2" class="bg-caramel py-2 rounded">Trouvez un produit de substitution pour ceux que vous consommez tous les jours</h2>
+                </div>
+                {% include 'pur_beurre/search_form2.html' %}
+            </div>
+
+        </div>
+    </header>
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="text-white bg-moules py-1">Colette et Rémy<br></h2>
+                    <hr class="my-4">
+                    <p class="mb-5" style="color: black;"><br>Nous sommes une jeune startup fondée par Remy et Colette Tatou, deux restaurateurs de renom. Notre restaurant, situé à Montmartre (Paris), compte une cinquantaine de couverts et ne désemplit pas. Notre spécialité, la ratatouille,
+                        nous attire une clientèle internationale charmée par les délices de ce plat typique.<br><br></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center">
+                    <div class="mx-auto service-box mt-5" data-aos="zoom-in"><img id="colette-img" src="{% static 'assets/img/colette-tatou-full.png' %}">
+                        <h3 class="mb-3 text-white bg-rooibos py-1">Colette</h3>
+                    </div>
+                    <div class="mx-auto service-box mt-5">
+                        <blockquote>   " Nous aimons tous manger, surtout en France ! Personnellement, une baguette fraîche, du bon fromage de
+                            chèvre et un bon vin rouge me suffisent amplement. Comme tout le monde, je fais mes courses au supermarché. Mais petit à
+                            petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits
+                            aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir Et souvent pour le même prix ! "
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <p class="bg-moules"></p>
+                    <div class="mx-auto service-box mt-5" data-aos="zoom-in"><img class="swing animated" id="remy-img" src="{% static 'assets/img/ratatouille-portrait.jpg' %}">
+                        <h3 class="mb-3 bg-rooibos text-white py-1">Rémy</h3>
+                    </div>
+                    <div class="mx-auto service-box mt-5">
+                        <blockquote>  " Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et
+                            les cuisines. Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les
+                            aliments vendus. Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je
+                            savais tout de suite où le trouver. L'idée de Pur Beurre était née ! "
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact-1">
+        <div class="container-fluid bg-moules">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading bg-caramel text-white py-2">Contactez-nous !</h2>
+                    <hr class="my-4">
+                    <p class="mb-5 text-white">Vous souhaitez goûter notre ratatouille maison ! Contactez-nous par mail ou par téléphone pour réserver dès maintenant.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center"><i class="fa fa-phone fa-3x mb-3 sr-contact" data-aos="zoom-in" data-aos-duration="300" data-aos-once="true" style="color: white;"></i>
+                    <p style="color: rgb(241,244,247);">123-456-6789</p>
+                </div>
+                <div class="col-lg-4 mr-auto text-center"><i class="fa fa-envelope-o fa-3x mb-3 sr-contact" data-aos="zoom-in" data-aos-duration="300" data-aos-delay="300" data-aos-once="true" style="color: white;"></i>
+                    <p><a href="mailto:your-email@your-domain.com" style="color: white;" >contact@purbeurre.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        {% endblock content %}
