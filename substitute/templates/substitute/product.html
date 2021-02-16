@@ -13,7 +13,7 @@
         </div>
         <div class="container">
             <div class="row ">
-            {% for pk, name, url, nutriscore in product_substitute %}
+            {% for pk, name, url, nutriscore, like, dislike in product_substitute %}
             <div class="col-md-6 col-lg-4 ">
                     <div class="card mt-4 product-box">
                         <div class="position-relative">
@@ -38,6 +38,19 @@
                                     <h5 class="card-title" >{{name}}</h5>
                                 </a>
                             </div>
+                        <div>
+
+                            <div class="row ">
+                                 <div class="col-md-6 text-center p-2">
+                                     <i class="fa fa-thumbs-up fa-lg">{{like}} </i>
+                                 </div>
+                                 <div class="col-md-6 text-center p-2">
+                                       <i class="fa fa-thumbs-down fa-lg"> {{dislike}}</i>
+                                 </div>
+                            </div>
+
+
+                        </div>
                         {% if user.is_authenticated %}
                         <div class="text-center card-footer">
                             <a href="{% url 'save_favorite' pk_prod=pk %}">
@@ -59,3 +72,5 @@
 </section>
 
 {% endblock content %}
+
+

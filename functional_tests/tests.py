@@ -92,8 +92,23 @@ class SeleniumTest(StaticLiveServerTestCase):
         # Test product detail
         sel.find_element_by_class_name("card-title").click()
         self.assertIn('Détail produit', sel.title)
+
+        # Test like function
+        element = sel.find_element_by_id("nbre-like").text
+        self.assertEqual(element, "0")
+        sel.find_element_by_id("btn-like").click()
+        element = sel.find_element_by_id("nbre-like").text
+        self.assertEqual(element, "1")
+
+        # Test dislike function
+        element = sel.find_element_by_id("nbre-dislike").text
+        self.assertEqual(element, "0")
+        sel.find_element_by_id("btn-dislike").click()
+        element = sel.find_element_by_id("nbre-dislike").text
+        self.assertEqual(element, "1")
+
         time.sleep(2)
-        sel.find_element_by_class_name("btn").click()
+        sel.find_element_by_id("btn-save").click()
         self.assertIn('Favoris', sel.title)
 
         # Test add favorites

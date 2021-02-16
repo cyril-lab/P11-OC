@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models.product import Product
 from .services.searchsubstitute import SearchSubstitute
@@ -28,6 +29,23 @@ def product(request, pk):
     product_detail = get_object_or_404(Product, pk=pk)
     return render(request, 'substitute/product_detail.html',
                   {'product': product_detail})
+
+
+def vote(request):
+    """this function returns like  """
+    if request.method == "GET":
+        type = request.GET.get("type")
+        value = request.GET.get("value")
+        pk = request.GET.get("pk")
+        product = Product.objects.get(pk=pk)
+        if type == "like":
+            product.like = product.like + int(value)
+        if type == "dislike":
+            product.dislike = product.dislike + int(value)
+        product.save()
+        return JsonResponse({"like": product.like,
+                             "dislike": product.dislike}, status=200)
+    return JsonResponse({"success": False}, status=400)
 
 
 def save_favorite(request, pk_prod):
