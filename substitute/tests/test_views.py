@@ -1,12 +1,9 @@
-from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.urls import reverse, resolve
 from substitute.models.product import Product
-from substitute.models.user import User
 from substitute.models.category import Category
 from substitute.views import homepage
-from substitute.services.favorite import Favorite
 
 
 class HomePageTest(TestCase):
@@ -27,8 +24,8 @@ class HomePageTest(TestCase):
 class SearchTestCase(TestCase):
     """this class test the search"""
     def setUp(self):
-        Product.objects.create(name="chocolat", category_id=1)
-        Product.objects.create(name="lait", category_id=1)
+        Product.objects.create(name="chocolat", category_id=1, nutriscore='a')
+        Product.objects.create(name="lait", category_id=1, nutriscore='b')
         Category.objects.create(name="snack", id=1)
 
     def test_template_return_unregistered_product(self):
@@ -40,6 +37,28 @@ class SearchTestCase(TestCase):
     def test_template_return_registered_product(self):
         """this function test the registered product"""
         response = self.client.get("/search/", {'name_product': 'chocolat'})
+        self.assertTemplateUsed(response, 'substitute/product.html')
+        self.failUnlessEqual(response.status_code, 200)
+
+    def test_filter_nutriscore(self):
+        """this function test the nutriscrore filter"""
+        response = self.client.get("/search/", {'name_product': 'chocolat',
+                                                'nutriscore': 'b'})
+        self.assertTemplateUsed(response, 'substitute/product.html')
+        self.failUnlessEqual(response.status_code, 200)
+
+    def test_filter_vote(self):
+        """this function test the vote filter"""
+        response = self.client.get("/search/", {'name_product': 'chocolat',
+                                                'vote': 'like'})
+        self.assertTemplateUsed(response, 'substitute/product.html')
+        self.failUnlessEqual(response.status_code, 200)
+
+    def test_filter_vote_and_nutriscore(self):
+        """this function test the nutriscrore filter and nutriscore"""
+        response = self.client.get("/search/", {'name_product': 'chocolat',
+                                                'vote': 'like',
+                                                'nutriscore': 'b'})
         self.assertTemplateUsed(response, 'substitute/product.html')
         self.failUnlessEqual(response.status_code, 200)
 
