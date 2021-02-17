@@ -13,13 +13,9 @@ class HomePageTest(TestCase):
     """this class test the homepage"""
     def test_root_url_resolves_to_home_page_view(self):
         """this function test the homepage url"""
-        found = resolve('/')
-        self.assertEqual(found.func, homepage)
-
-    def test_home_page_returns_correct_html(self):
-        """this function test the homepage html"""
-        request = HttpRequest()
-        response = homepage(request)
+        response = self.client.get('/')
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'substitute/index.html')
         html = response.content.decode('utf8')
         self.assertIn('<title>Accueil</title>', html)
 
