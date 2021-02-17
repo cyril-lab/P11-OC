@@ -3,3 +3,4 @@ venv/
 __pycache__
 .cache/
 /pur_beurre/htmlcov/
+geckodriver.log
