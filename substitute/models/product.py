@@ -18,6 +18,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     favorite = models.ManyToManyField(User, related_name="user_favorite",
                                       blank=True)
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
 
     def __str__(self):
         return self.pk

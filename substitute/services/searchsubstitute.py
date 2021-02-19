@@ -34,5 +34,5 @@ class SearchSubstitute:
             .filter(search=product_category).exclude(id=product_pk)
         for p in search_substitute:
             self.product_substitute.append(
-                [p.pk, p.name, p.image_url, p.nutriscore])
+                [p.pk, p.name, p.image_url, p.nutriscore, p.like, p.dislike])
         return self.product_substitute

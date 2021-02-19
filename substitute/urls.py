@@ -12,4 +12,6 @@ urlpatterns = [
          name='favorite-detail'),
     path('contact/', views.contact, name='contact'),
     path('legal/', views.legal, name='legal'),
+    path('vote/', views.vote, name='vote'),
+
 ]
