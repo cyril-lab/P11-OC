@@ -89,6 +89,10 @@ class SeleniumTest(StaticLiveServerTestCase):
         self.assertIn('Produits', sel.title)
         time.sleep(2)
 
+        # Test filter product
+        sel.find_element_by_id("b").click()
+        sel.find_element_by_id("search-button").click()
+
         # Test product detail
         sel.find_element_by_class_name("card-title").click()
         self.assertIn('Détail produit', sel.title)
@@ -114,7 +118,7 @@ class SeleniumTest(StaticLiveServerTestCase):
         # Test add favorites
         time.sleep(2)
         element = sel.find_element_by_class_name("card-title").text
-        self.assertEqual(element, "lait")
+        self.assertEqual(element, "biscuit")
 
         # Test logout
         sel.find_element_by_id("logout-btn").click()
