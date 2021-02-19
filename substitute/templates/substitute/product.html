@@ -13,6 +13,47 @@
         </div>
         <div class="container">
             <div class="row ">
+                <div class="col-md-12 m-2">
+                <form class=" input-group" method="GET" action="{% url 'search' %}">
+                    <div class="mx-auto">
+                    <input id="search" type="search" class="form-control" placeholder="Produit" name="name_product" autocomplete="off"  value="{{search_product}}">
+                    </div>
+                    <div class="p-2 mx-auto">
+                        <input type="radio" id="a" name="nutriscore" value="a">
+                        <label for="a">A</label>
+                    </div>
+                    <div class="p-2 mx-auto">
+                        <input type="radio" id="b" name="nutriscore" value="b">
+                        <label for="b">B</label>
+                    </div>
+                    <div class="p-2 mx-auto">
+                        <input type="radio" id="c" name="nutriscore" value="c">
+                        <label for="c">C</label>
+                    </div>
+                    <div class="p-2 mx-auto">
+                        <input type="radio" id="d" name="nutriscore" value="d">
+                        <label for="d">D</label>
+                    </div>
+                    <div class="p-2 mx-auto">
+                        <input type="radio" id="e" name="nutriscore" value="e">
+                        <label for="e">E</label>
+                    </div>
+                    <div class="p-2 mx-auto">
+                        <input type="radio" id="like" name="vote" value="like">
+                        <label for="like">Like</label>
+                    </div>
+                    <div class="p-2 mx-auto">
+                        <input type="radio" id="dislike" name="vote" value="dislike">
+                        <label for="dislike">Dislike</label>
+                    </div>
+                    <div class="col-md-2 input-group-append">
+                    <button id="search-button"class="btn btn-primary" type="submit">Filtrer</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+
+            <div class="row ">
             {% for pk, name, url, nutriscore, like, dislike in product_substitute %}
             <div class="col-md-6 col-lg-4 ">
                     <div class="card mt-4 product-box">
