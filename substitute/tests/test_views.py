@@ -58,3 +58,37 @@ class ProductTestCase(TestCase):
         response = self.client.get(reverse('product', kwargs={'pk': 1}))
         self.assertTemplateUsed(response, 'substitute/product_detail.html')
         self.failUnlessEqual(response.status_code, 200)
+
+
+class VoteTest(TestCase):
+    """this class test the function named vote"""
+    def setUp(self):
+        Product.objects.create(id=1,
+                               name="chocolat",
+                               like=0,
+                               dislike=2,
+                               category_id=1)
+        Category.objects.create(name="snack", id=1)
+        self.product = Product.objects.get(id=1)
+
+    def test_like_vote(self):
+        """this function test a like vote"""
+        self.product = Product.objects.get(id=1)
+        self.assertEqual(self.product.like, 0)
+        response = self.client.get("/vote/", {'type': 'like',
+                                              'value': 1,
+                                              'pk': 1})
+        self.product = Product.objects.get(id=1)
+        self.assertEqual(self.product.like, 1)
+        self.failUnlessEqual(response.status_code, 200)
+
+    def test_dislike_vote(self):
+        """this function test a dislike vote"""
+        self.product = Product.objects.get(id=1)
+        self.assertEqual(self.product.dislike, 2)
+        response = self.client.get("/vote/", {'type': 'dislike',
+                                              'value': 1,
+                                              'pk': 1})
+        self.product = Product.objects.get(id=1)
+        self.assertEqual(self.product.dislike, 3)
+        self.failUnlessEqual(response.status_code, 200)

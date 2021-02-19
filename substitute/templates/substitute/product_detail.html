@@ -13,6 +13,22 @@
         </div>
         <div class="container">
             <div class="row ">
+                <div class="col-md-12 m-4 text-center bg-caramel p-2">
+                    <a class="text-white " href="{{product.url}}">Voir fiche openfoodfact</a>
+                </div>
+                <div class="col-md-12 text-center">
+                    {% if user.is_authenticated %}
+                        <a id="btn-save" href="{% url 'save_favorite' pk_prod=product.pk %}">
+                            <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-star fa fa-floppy-o mr-2">
+                                    </i>Sauvegarder
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="row ">
                 <div class="col-md-6 text-center">
                     {% if product.nutriscore == "a"%}
                         <img src={% static 'assets/fonts/nutriscore-a.svg' %}>
@@ -37,22 +53,94 @@
                 </div>
             </div>
             <div class="row ">
-                <div class="col-md-12 m-4 text-center bg-caramel p-2">
-                    <a class="text-white " href="{{product.url}}">Voir fiche openfoodfact</a>
-                </div>
-                <div class="col-md-12 text-center">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'save_favorite' pk_prod=product.pk %}">
-                            <button class="btn btn-primary" type="button">
-                                    <i class="fa fa-star fa fa-floppy-o mr-2">
-                                    </i>Sauvegarder
-                            </button>
-                        </a>
-                    {% endif %}
-                </div>
-
+                <div class="col-md-3 text-center p-2">
+                    <button id="btn-like" class="btn btn-secondary" type="button" aria-pressed="false">
+                        <i id="nbre-like" class="fa fa-thumbs-up fa-lg">{{product.like}}</i>
+                     </button>
+                 </div>
+                 <div class="col-md-3 text-center p-2">
+                     <button id="btn-dislike" class="btn btn-secondary" type="button" aria-pressed="false">
+                        <i id="nbre-dislike" class="fa fa-thumbs-down fa-lg">{{product.dislike}}</i>
+                     </button>
+                 </div>
             </div>
         </div>
     </section>
+
+
+{% block javascript %}
+  <script>
+      $(document).ready(function(){
+        $("#btn-like").click(function(){
+            let valueLike;
+            let ariaButtonLike = $("#btn-like").attr('aria-pressed');
+            let ariaButtonDislike = $("#btn-dislike").attr('aria-pressed');
+            if (ariaButtonDislike == "false"){
+                if (ariaButtonLike == "true"){
+                    valueLike = -1;
+                    $("#btn-like").attr({
+                        'aria-pressed': 'false',
+                        'class': 'btn btn-secondary'
+                    });
+                }
+                else {
+                    valueLike = 1;
+                    $("#btn-like").attr({
+                        'aria-pressed': 'true',
+                        'class': 'btn btn-success'
+                    });
+                }
+                 $.ajax({
+                    url: '/vote/',
+                    data: {
+                        'type': "like",
+                        'value': valueLike,
+                        'pk': {{product.pk}}
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#nbre-like").html(data.like)
+                        }
+                    });
+                };
+            });
+
+        $("#btn-dislike").click(function(){
+            let valueDislike;
+            let ariaButtonLike = $("#btn-like").attr('aria-pressed');
+            let ariaButtonDislike = $("#btn-dislike").attr('aria-pressed');
+            if (ariaButtonLike == "false"){
+                if (ariaButtonDislike == "true"){
+                    valueDislike = -1;
+                    $("#btn-dislike").attr({
+                        'aria-pressed': 'false',
+                        'class': 'btn btn-secondary'
+                    });
+                }
+                else {
+                    valueDislike = 1;
+                    $("#btn-dislike").attr({
+                        'aria-pressed': 'true',
+                        'class': 'btn btn-success'
+                    });
+                }
+                 $.ajax({
+                    url: '/vote/',
+                    data: {
+                        'type': "dislike",
+                        'value': valueDislike,
+                        'pk': {{product.pk}}
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#nbre-dislike").html(data.dislike)
+                        }
+                });
+            };
+        });
+      });
+  </script>
+
+{% endblock %}
 
 {% endblock content %}
