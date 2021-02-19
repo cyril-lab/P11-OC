@@ -40,7 +40,7 @@ def vote(request):
         product = Product.objects.get(pk=pk)
         if type == "like":
             product.like = product.like + int(value)
-        if type == "dislike":
+        elif type == "dislike":
             product.dislike = product.dislike + int(value)
         product.save()
         return JsonResponse({"like": product.like,

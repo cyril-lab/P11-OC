@@ -50,28 +50,20 @@
                     <h5>Acides gras saturés : <strong>{{product.nutriment_saturated_fat}}</strong> g </h5>
                     <h5>Sel : <strong>{{product.nutriment_salt}}</strong> g  </h5>
                     <h5>Sucres : <strong>{{product.nutriment_sugars}}</strong> g </h5>
-
-
                 </div>
             </div>
             <div class="row ">
                 <div class="col-md-3 text-center p-2">
                     <button id="btn-like" class="btn btn-secondary" type="button" aria-pressed="false">
                         <i id="nbre-like" class="fa fa-thumbs-up fa-lg">{{product.like}}</i>
-
                      </button>
                  </div>
                  <div class="col-md-3 text-center p-2">
                      <button id="btn-dislike" class="btn btn-secondary" type="button" aria-pressed="false">
                         <i id="nbre-dislike" class="fa fa-thumbs-down fa-lg">{{product.dislike}}</i>
-
                      </button>
-
                  </div>
-
             </div>
-
-
         </div>
     </section>
 
@@ -80,41 +72,75 @@
   <script>
       $(document).ready(function(){
         $("#btn-like").click(function(){
-             $.ajax({
-                url: '/vote/',
-                data: {
-                    'type': "like",
-                    'value': 1,
-                    'pk': {{product.pk}}
-                },
-                dataType: 'json',
-                success: function (data) {
-                    $("#nbre-like").html(data.like)
-                    }
-             });
-  });
-});
-  </script>
-  <script>
-      $(document).ready(function(){
+            let valueLike;
+            let ariaButtonLike = $("#btn-like").attr('aria-pressed');
+            let ariaButtonDislike = $("#btn-dislike").attr('aria-pressed');
+            if (ariaButtonDislike == "false"){
+                if (ariaButtonLike == "true"){
+                    valueLike = -1;
+                    $("#btn-like").attr({
+                        'aria-pressed': 'false',
+                        'class': 'btn btn-secondary'
+                    });
+                }
+                else {
+                    valueLike = 1;
+                    $("#btn-like").attr({
+                        'aria-pressed': 'true',
+                        'class': 'btn btn-success'
+                    });
+                }
+                 $.ajax({
+                    url: '/vote/',
+                    data: {
+                        'type': "like",
+                        'value': valueLike,
+                        'pk': {{product.pk}}
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#nbre-like").html(data.like)
+                        }
+                    });
+                };
+            });
+
         $("#btn-dislike").click(function(){
-             $.ajax({
-                url: '/vote/',
-                data: {
-                    'type': "dislike",
-                    'value': 1,
-                    'pk': {{product.pk}}
-                },
-                dataType: 'json',
-                success: function (data) {
-                    $("#nbre-dislike").html(data.dislike)
-                    }
-             });
-  });
-});
+            let valueDislike;
+            let ariaButtonLike = $("#btn-like").attr('aria-pressed');
+            let ariaButtonDislike = $("#btn-dislike").attr('aria-pressed');
+            if (ariaButtonLike == "false"){
+                if (ariaButtonDislike == "true"){
+                    valueDislike = -1;
+                    $("#btn-dislike").attr({
+                        'aria-pressed': 'false',
+                        'class': 'btn btn-secondary'
+                    });
+                }
+                else {
+                    valueDislike = 1;
+                    $("#btn-dislike").attr({
+                        'aria-pressed': 'true',
+                        'class': 'btn btn-success'
+                    });
+                }
+                 $.ajax({
+                    url: '/vote/',
+                    data: {
+                        'type': "dislike",
+                        'value': valueDislike,
+                        'pk': {{product.pk}}
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#nbre-dislike").html(data.dislike)
+                        }
+                });
+            };
+        });
+      });
   </script>
+
 {% endblock %}
-
-
 
 {% endblock content %}

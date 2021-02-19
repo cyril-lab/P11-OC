@@ -105,7 +105,7 @@ class SeleniumTest(StaticLiveServerTestCase):
         self.assertEqual(element, "0")
         sel.find_element_by_id("btn-dislike").click()
         element = sel.find_element_by_id("nbre-dislike").text
-        self.assertEqual(element, "1")
+        self.assertEqual(element, "0")
 
         time.sleep(2)
         sel.find_element_by_id("btn-save").click()
